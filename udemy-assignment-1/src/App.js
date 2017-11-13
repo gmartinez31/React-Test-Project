@@ -15,9 +15,18 @@ class App extends Component {
   }
   
   render() {
+    const style = {
+      width: '50%',
+      margin: '15px auto',
+      border: '1px solid ghostwhite',
+      boxShadow: '0 2px 3px silver',
+      padding: '16px',
+      textAlign: 'center'
+    }
+
     return (
       <div className='App'>
-        <h1>Udemy React Assignment #1</h1>
+        <h1 style={style}>Udemy React Assignment #1</h1>
         <UserOutput
           username = {this.state.username}
         />
