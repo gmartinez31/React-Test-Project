@@ -1,7 +1,13 @@
 import React from 'react';
 
-const UserOuput = (props) => {
+const UserOutput = (props) => {
     return (
-        stuff
+        <div className='UserOutput'>
+            <p>Hello {props.username}!</p>
+            <p>Stuff stuff stuff</p>
+            <br />
+        </div>
     )
 };
+
+export default UserOutput;
