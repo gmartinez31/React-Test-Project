@@ -36,6 +36,7 @@ class App extends Component {
       persons:
         [
           { name: 'Gustavo', age: 26 },
+          // event.target refers to the element the event occurred on //
           { name: event.target.value, age: 25 },
           { name: 'Cris', age: 19 },
           { name: 'Freddy', age: 200 },
