@@ -3,6 +3,7 @@ import './Person.css';
 // {} anything inside these braces react interprets as actual js not literal 'html'(jsx) so the input is dynamic rather than static
 
 const person = (props) => {
+
     return (
         <div className='Person'>
             <p onClick={props.click}>I'm {props.name} and I'm {props.age} years old!</p>

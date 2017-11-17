@@ -74,7 +74,6 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
     }
 
     let persons = null;
@@ -93,13 +92,29 @@ class App extends Component {
           })};
         </div>
       );
-      style.backgroundColor = 'red'; 
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
+    }
+
+    // here we are simply stating classes to be used dynamically. when 'classes' obj is assigned to a classname, red and bold classes are assigned.
+    // let classes = ['red', 'bold'].join(' ')
+
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     // good practice to wrap everything under one root element per component used //
     return (
       <div className="App">
         <h1>First React App</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
         {/* binding this means we want the 'this' in the switchnamehandler so we literally add .bind afterwards with whatever we want to bind from that specific thing. In this case we wanted the this from that handler. */}
         {/* ...{this.swit..er.bind(this)} */}
         {/* vs. */}
@@ -141,4 +156,5 @@ class App extends Component {
   }
 }
 
+// this is known as a higher-order component
 export default App;
