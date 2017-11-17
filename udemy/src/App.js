@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 // JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of nested React.createElement(...) calls.
@@ -68,15 +68,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-    }
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -92,36 +85,33 @@ class App extends Component {
           })};
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      btnClass = classes.Red;
     }
 
     // here we are simply stating classes to be used dynamically. when 'classes' obj is assigned to a classname, red and bold classes are assigned.
     // let classes = ['red', 'bold'].join(' ')
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push( classes.red );
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push( classes.bold );
     }
 
     // good practice to wrap everything under one root element per component used //
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>First React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
         {/* binding this means we want the 'this' in the switchnamehandler so we literally add .bind afterwards with whatever we want to bind from that specific thing. In this case we wanted the this from that handler. */}
         {/* ...{this.swit..er.bind(this)} */}
         {/* vs. */}
         {/* However we can also pass swi... as an anonymous function that will be called on the onClick */}
         <button
-          style = {style}
-          onClick = {this.togglePersonsHandler}>Toggle Persons</button>
+          className = {btnClass}
+          onClick = {this.togglePersonsHandler}>Toggle Persons
+          </button>
         {/* in this case 'this' refers to the class */}
         {/* YOU can pass methods as props so you can call methods */}
         {/* { this.state.showPersons ? */}
