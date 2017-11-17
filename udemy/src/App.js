@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 // JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of nested React.createElement(...) calls.
 
@@ -76,12 +77,12 @@ class App extends Component {
         <div className=''>
           {/* instead of hard coding each person in the array we map the array, Persons, return each item in the array as the following */}
           {this.state.persons.map((person, index) => {
-            return <Person 
+            // key always has to be on the outer most component so we move it from person to error //
+            return <ErrorBoundary key={person.id}><Person 
               name={person.name} 
               age={person.age} 
-              click={() => this.deleteNameHandler(index)} 
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)}/>
+              click={() => this.deleteNameHandler(index)}
+              changed={(event) => this.nameChangedHandler(event, person.id)}/></ErrorBoundary>
           })};
         </div>
       );
