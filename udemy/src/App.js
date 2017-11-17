@@ -69,7 +69,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'ghostwhite',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -89,9 +90,10 @@ class App extends Component {
               click={() => this.deleteNameHandler(index)} 
               key={person.id}
               changed={(event) => this.nameChangedHandler(event, person.id)}/>
-          })} 
+          })};
         </div>
       );
+      style.backgroundColor = 'red'; 
     }
 
     // good practice to wrap everything under one root element per component used //
