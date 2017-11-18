@@ -21,7 +21,7 @@ const cockpit = (props) => {
 
     return (
         <div className = {classes.Cockpit}>
-            <h1>First React App</h1>
+            <h1>{ props.appTitle } </h1>
             <p className={assignedClasses.join(' ')}>This is really working!</p>
             {/* binding this means we want the 'this' in the switchnamehandler so we literally add .bind afterwards with whatever we want to bind from that specific thing. In this case we wanted the this from that handler. */ }
             {/* ...{this.swit..er.bind(this)} */ }
