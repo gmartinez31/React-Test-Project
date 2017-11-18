@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 // JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of nested React.createElement(...) calls.
 
@@ -69,23 +71,21 @@ class App extends Component {
 
   render() {
     let persons = null;
-
     if (this.state.showPersons) {
-      persons = (
-        <div className=''>
-          <Persons 
-            persons = {this.state.persons}
-            clicked = {this.deleteNameHandler}
-            changed = {this.nameChangedHandler}/>
-          
-        </div>
-      );
+      persons = <Persons 
+          persons = {this.state.persons}
+          clicked = {this.deleteNameHandler}
+          changed = {this.nameChangedHandler}/>;
     }
 
 
     // good practice to wrap everything under one root element per component used //
     return (
       <div className={classes.App}>
+        <Cockpit 
+          showPersons = {this.state.showPersons}
+          persons = {this.state.persons}
+          clicked = {this.togglePersonsHandler}/>
         {persons}
       </div>
     );
@@ -97,3 +97,5 @@ class App extends Component {
 }
 
 export default App;
+
+// Remember, the container (app.js), manages the state and manipulates the state with handler methods //
