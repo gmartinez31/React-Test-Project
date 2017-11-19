@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from './Cockpit.css';
+import Aux from '../../hoc/Aux';
 
 
 const cockpit = (props) => {
-    let btnClass = '';
+    let btnClass = classes.Button;
     if(props.showPersons) {
-        btnClass = classes.Red;
+        btnClass = [classes.Button, classes.Red].join(' ');
     }
     // here we are simply stating classes to be used dynamically. when 'classes' obj is assigned to a classname, red and bold classes are assigned.
     // let classes = ['red', 'bold'].join(' ')
@@ -20,7 +21,7 @@ const cockpit = (props) => {
 
 
     return (
-        <div className = {classes.Cockpit}>
+        <Aux>
             <h1>{ props.appTitle } </h1>
             <p className={assignedClasses.join(' ')}>This is really working!</p>
             {/* binding this means we want the 'this' in the switchnamehandler so we literally add .bind afterwards with whatever we want to bind from that specific thing. In this case we wanted the this from that handler. */ }
@@ -31,7 +32,7 @@ const cockpit = (props) => {
                 className={btnClass}
                 onClick={props.clicked}>Toggle Persons
             </button>
-        </div>
+        </Aux>
 
         // {/* in this case 'this' refers to the class */ }
         // {/* YOU can pass methods as props so you can call methods */ }

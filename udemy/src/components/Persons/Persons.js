@@ -3,6 +3,20 @@ import Person from './Person/Person';
 
 // stateful component //
 class Persons extends Component {
+    constructor(props) {
+        super(props);
+        console.log('works', props);
+        // you can also initialize state here with this.state but below works fine too //
+    }
+
+    componentWillMount() {
+        console.log('cwm');
+    }
+
+    componentDidMount() {
+        console.log('cdm');
+    }
+    
     render () {
         return this.props.persons.map((person, index) => {
             // key always has to be on the outer most component so we move it from person to error //

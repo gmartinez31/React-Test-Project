@@ -1,12 +1,27 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/Withclass';
 
 // JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of nested React.createElement(...) calls.
 
-class App extends Component {
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    console.log('works', props);
+    // you can also initialize state here with this.state but below works fine too //
+  }
+
+  componentWillMount() {
+    console.log('cwm');
+  }
+
+  componentDidMount() {
+    console.log('cdm');
+  }
+
   // state only available when 'extends Component' is used //
   state = {
     persons: [
@@ -81,14 +96,15 @@ class App extends Component {
 
     // good practice to wrap everything under one root element per component used //
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
+        <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
         <Cockpit
           appTitle = {this.props.title} 
           showPersons = {this.state.showPersons}
           persons = {this.state.persons}
           clicked = {this.togglePersonsHandler}/>
         {persons}
-      </div>
+      </WithClass>
     );
 
     // or
