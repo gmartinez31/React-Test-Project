@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../../containers/Blog/Posts/Posts';
 import NewPost from '../../containers/Blog/NewPost/NewPost';
 
 class Blog extends Component {
+    state = {
+        auth: true
+    }
 
     render () {
         return (
@@ -33,8 +36,11 @@ class Blog extends Component {
                 </header>
                 {/* technically we can remove switch tag. not needed */}
                 <Switch>
-                    <Route path='/new-post' component={NewPost} />
+                    {this.state.auth ? <Route path='/new-post' component={NewPost} /> : null}
                     <Route path='/posts' component={Posts}/>
+                    <Route render= {() => <h1>404 Not Found</h1>} />
+                    {/* If you want to use redirect outside switch don't include from */}
+                    <Redirect from='/' to='/posts' />
                 </Switch>
             </div>
         );
