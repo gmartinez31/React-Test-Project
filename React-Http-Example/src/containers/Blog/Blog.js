@@ -3,7 +3,11 @@ import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../../containers/Blog/Posts/Posts';
-import NewPost from '../../containers/Blog/NewPost/NewPost';
+import asyncComponent from '../../hoc/asyncComponent';
+// import NewPost from '../../containers/Blog/NewPost/NewPost';
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+})
 
 class Blog extends Component {
     state = {
@@ -36,7 +40,8 @@ class Blog extends Component {
                 </header>
                 {/* technically we can remove switch tag. not needed */}
                 <Switch>
-                    {this.state.auth ? <Route path='/new-post' component={NewPost} /> : null}
+                    {/* this is how you load components asynchronously  */}
+                    {this.state.auth ? <Route path='/new-post' component={AsyncNewPost} /> : null}
                     <Route path='/posts' component={Posts}/>
                     <Route render= {() => <h1>404 Not Found</h1>} />
                     {/* If you want to use redirect outside switch don't include from */}
