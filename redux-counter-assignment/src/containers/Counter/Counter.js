@@ -32,10 +32,18 @@ class Counter extends Component {
                 {/* So instead of the line below, by using connect, we get our state from redux store so.. */}
                 {/* <CounterOutput value={this.state.counter} /> */}
                 <CounterOutput value={this.props.ctr} />
-                <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} />
-                <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
-                <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  />
+
+                {/* <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} /> */}
+                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
+
+                {/* <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  /> */}
+                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter} />
+
+                {/* <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  /> */}
+                <CounterControl label="Add 5" clicked={this.props.onAdd5Counter} />
+
+                {/* <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  /> */}
+                <CounterControl label="Subtract 5" clicked={this.props.onSubtract5Counter} />
             </div>
         );
     }
@@ -45,7 +53,16 @@ const mapStatetoProps = (state) => {
     return {
         // basically saying that state.counter is the global state
         ctr: state.counter
-    }
-}
+    };
+};
 
-export default connect(mapStatetoProps)(Counter);
+const mapDispatchtoProps = (dispatch) => {
+    return {
+        onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
+        onDecrementCounter: () => dispatch({type: 'DECREMENT'}),
+        onAdd5Counter: () => dispatch({type: 'ADD 5'}),
+        onSubtract5Counter: () => dispatch({type: 'SUBTRACT 5'})
+    };
+};
+
+export default connect(mapStatetoProps, mapDispatchtoProps)(Counter);
