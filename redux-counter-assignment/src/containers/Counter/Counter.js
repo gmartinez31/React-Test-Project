@@ -40,19 +40,30 @@ class Counter extends Component {
                 <CounterControl label="Decrement" clicked={this.props.onDecrementCounter} />
 
                 {/* <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  /> */}
-                <CounterControl label="Add 5" clicked={this.props.onAdd5Counter} />
+                <CounterControl label="Add" clicked={this.props.onAdd5Counter} />
 
                 {/* <CounterControl label="Subtract 5" clicked={() => this.counterChangedHandler( 'sub', 5 )}  /> */}
-                <CounterControl label="Subtract 5" clicked={this.props.onSubtract5Counter} />
+                <CounterControl label="Subtract" clicked={this.props.onSubtract5Counter} />
+                <hr />
+                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <ul>
+                    {this.props.storedResults.map(result => {
+                        return (
+                            <li key={result.id} onClick={this.props.onDeleteResult}>{result.value}</li>
+                        )
+                    })}
+                </ul>
             </div>
         );
     }
 }
 
+// literally having access to state in store via props
 const mapStatetoProps = (state) => {
     return {
         // basically saying that state.counter is the global state
-        ctr: state.counter
+        ctr: state.counter,
+        storedResults: state.results
     };
 };
 
@@ -60,8 +71,10 @@ const mapDispatchtoProps = (dispatch) => {
     return {
         onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
         onDecrementCounter: () => dispatch({type: 'DECREMENT'}),
-        onAdd5Counter: () => dispatch({type: 'ADD 5'}),
-        onSubtract5Counter: () => dispatch({type: 'SUBTRACT 5'})
+        onAdd5Counter: () => dispatch({type: 'ADD', value: 5}),
+        onSubtract5Counter: () => dispatch({type: 'SUBTRACT', value: 5 }),
+        onStoreResult: () => dispatch({type: 'STORE-RESULT'}),
+        onDeleteResult: () => dispatch({ type: 'DELETE-RESULT' })
     };
 };
 
