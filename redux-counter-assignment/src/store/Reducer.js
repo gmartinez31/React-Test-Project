@@ -1,3 +1,5 @@
+import * as actionTypes from './actions';
+
 const initialState = {
     counter: 0,
     results: []
@@ -5,34 +7,34 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case 'INCREMENT':
+        case actionTypes.INCREMENT:
             return {
                 ...state,
                 counter: state.counter + 1
             }
-        case 'DECREMENT':
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case 'ADD':
+        case actionTypes.ADD:
             return {
                 ...state,
                 // the action refers to the value in the maptodispatch //
                 counter: state.counter + action.value
             }
-        case 'SUBTRACT':
+        case actionTypes.SUBTRACT:
             return {
                 ...state,
                 counter: state.counter - action.value
             }
-        case 'STORE-RESULT':
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
                 // concat returns a new array by imutably adding an item to the original array where concat was performed
                 results: state.results.concat({ id: new Date(), value: state.counter })
             }
-        case 'DELETE-RESULT':
+        case actionTypes.DELETE_RESULT:
             // const id = 2;
             // const newArrary = [...state.results];
             // newArrary.splice(id, 1)  ORRRR
